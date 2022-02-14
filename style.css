@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-label {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.form-btn {
+    border-radius: 10px;
+    background-color: #99ff99;
+    cursor: pointer;
+    outline: none;
+    padding: 5px 15px;
+    border: none;
+}
+
+:hover.form-btn {
+    background-color: #518b51;
+}
+
