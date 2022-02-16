@@ -1,19 +1,20 @@
 <?php 
 
+   $name = 'Bars';
    $login = 'barsum';
    $pass = '123';
 
+   //$nameId = $_POST['nameId']; если можно обратиться типа nameId.color 
+   //$loginId = $_POST['loginId'];
+   //$passId = $_POST['passId'];
 
-   if($login == $_POST['login'] && $pass == $_POST['pass']) {
-      echo $_POST['name'];   
+   if($name !== $_POST['name'] || $login !== $_POST['login'] || $pass !== $_POST['pass']) {
+      header("Location: /index.html"); 
    }
    
-   if($login != $_POST['login']) {
-      echo "Введите логин";
-   }
-   
-   if($pass != $_POST['pass']) {
-      echo "Введите пароль";
+   if($name === $_POST['name'] && $login === $_POST['login'] && $pass === $_POST['pass']) {
+      echo "дратути";
    }
 
 ?> 
+

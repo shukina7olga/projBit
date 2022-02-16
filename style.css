@@ -3,6 +3,14 @@
     font-family: sans-serif;
 }
 
+input {
+    outline: none; border: 5px double #000000;
+}
+
+.input-red {
+    border: 5px double red;
+}
+
 .form {
     display: flex;
     justify-content: center;
@@ -11,9 +19,7 @@
 }
 
 .form-label {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10px;
+    display: flex; flex-direction: column; padding-bottom: 10px;
 }
 
 .form-btn {
