@@ -11,9 +11,7 @@
          <h2>Неверный логин или пароль!</h2>
          <a class='fault-btn' href='/index.html'>Попробовать снова</a>
       </div>";
-   }
-
-   if($login === $_POST['login'] && $pass === $_POST['pass']) {
+   } else {
       echo 
       "<div class='fault'>
          <h2>Добро пожаловать, ${name} </h2>
