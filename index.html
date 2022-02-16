@@ -7,39 +7,12 @@
     <title>projBit</title>
     <link rel="stylesheet" href="style.css">
 
-    <script type='text/javascript'> 
-    //     let nameId = document.querySelector('#nameId'); почему в setTimeout не видно переменную
-
-        setTimeout(function(){
-            let nameId = document.querySelector('#nameId');
-            let loginId = document.querySelector('#loginId');
-            let passId = document.querySelector('#passId');
-
-            if(nameId.value !== 'Bars') {
-                nameId.style.borderColor = 'red';
-            } 
-            
-            if(loginId.value !== 'barsum') {
-                loginId.style.borderColor = 'red';
-            } 
-
-            if(passId.value !== '123') {
-                passId.style.borderColor = 'red';
-            } 
-
-        },6000);
-        
-    
-    </script>
-
 </head>
 <body>
 
     <form  class="form" action="backend.php" method="post">
         <h2>Форма авторизации</h2>
-        <label style="display: flex; flex-direction: column; padding-bottom: 10px;" class="form-label">Имя
-            <input style="outline: none; border: 5px double rgb(0, 0, 0);" type="text" name="name" id="nameId">
-        </label>
+
         <label style="display: flex; flex-direction: column; padding-bottom: 10px;" class="form-label">Логин
             <input style="outline: none; border: 5px double rgb(0, 0, 0);" type="text" name="login" id="loginId">
         </label>
@@ -48,8 +21,6 @@
         </label>
         <p><input type="submit" class="form-btn"/></p>
     </form>
-    
-
 
 </body>
 </html>
