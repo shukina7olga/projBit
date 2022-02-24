@@ -1,46 +1,103 @@
-//  errorMessage = 'что-то не так',
-//     loadMessage = "загрузка",
-//     loginMessage = "вы вошли",
-
-console.log('work');
 const form = document.getElementById('formAj');
 
 form.addEventListener('submit', (event) => {
-    event.preventDefault();
+  event.preventDefault();
+ 
+  fetch('backend.php', {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(response => {
+    console.log(response);
+    return response.text();
+  })
+  .then(text => { 
+    form.innerHTML = text;
+  
+    let indexOfX = text.indexOf("{");
+    text = text.substring(indexOfX,text.length)
 
-    let divResp = document.createElement('div');
-    divResp.innerHTML = "<b>Hello world!</b>";
+    let pars = JSON.parse(text);
+    console.log(pars);
+    return pars;
+  });
 
-   fetch('backend.php', {
-        method: 'POST',
-        body: new FormData(form)
-      })
-      .then((response) => response.text())
-      .then((text) => form.innerHTML = text);
+   
+// const request = new XMLHttpRequest();    
+
+// request.open('GET', 'backend.php');
+
+// request.setRequestHeader( 'Content-Type', 'application/json');
+ 
+// request.addEventListener("readystatechange", () => {
+
+// 	if ( request.status === 200) {
+//     let data = JSON.stringify(request);
+//     let parsed = JSON.parse(data);
+//       console.log(parsed.text);
+// 	  //console.log( request.responseText);
+//     }
+// });
+ 
+// // Выполняем запрос 
+// request.send(); 
+      
+
+
 }) 
 
-//form.append(divResp);
-    //document.innerHTML = divResp;
-   
-    // создаем объект экземпляра класса XMLHttpRequest
-    // const request = new XMLHttpRequest()
-    // request.addEventListener('readystatechange', () => {
-       
-    //     if(request.readyState !== 4) { 
-    //         return;
-    //     }
-    //     if(request.status === 200){ // всё ок
-    //         let resp = request.response;
-    //         divResp.innerHTML = resp;
-    //     }
-    // })
-    // request.open('POST', 'backend.php');
-    // request.setRequestHeader('Content-Type', 'multipart/form-data'); // устанавливает значение полей для отсылаемых данных
-    // перед отправкой получаем данные 
-    // const formData = new FormData();
-    // let inputs = document.querySelectorAll('input');
-    // inputs.forEach((input) => {
-    //     formData.append(input.name, input.value);
-    // });
-    // //отправляем при помощи метода send
-    // request.send(formData);
+
+
+
+
+
+
+// let vote = () => {
+
+//   let getXmlHttp = () => {
+//     let xmlhttp;
+//     try {
+//       xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+//     } catch (e) {
+//       try {
+//         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+//       } catch (E) {
+//         xmlhttp = false;
+//       }
+//     }
+//     if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+//       xmlhttp = new XMLHttpRequest();
+//     }
+//     return xmlhttp;
+//   }
+// // (1) создать объект для запроса к серверу
+// let req = getXmlHttp(); 
+  
+// req.onreadystatechange = function() { 
+//     // onreadystatechange активируется при получении ответа сервера
+
+//     if (req.readyState == 4) {
+//         // если запрос закончил выполняться
+//         if(req.status == 200) {
+//               // если статус 200 (ОК) - выдать ответ пользователю
+//             console.log("Ответ сервера: "+req.response);
+//         }
+//     }
+
+// }
+
+//     //  задать адрес подключения
+// req.open('GET', 'backend.php', true); 
+
+// // объект запроса подготовлен: указан адрес и создана функция onreadystatechange
+// // для обработки ответа сервера
+  
+//     // 
+// req.send(null);  // отослать запрос
+
+// }
+
+// vote();
+
+
+
