@@ -6,17 +6,11 @@
 
 
    if($pass === $_POST['pass'] && $login === $_POST['login']) {
-      ?>
-      <div class='fault'>
-         <h2>Добро пожаловать, <?=$name?>, вы зашли как <?=$fullName?></h2>
-         <a class='fault-btn' href='/index.html'>Войти как другой пользователь</a>
-      </div>
-      
-      <?php 
+ 
       $arr = array(
-         1 => $name,
-         2 => $fullName,
-         3 => $pass
+         one => $name,
+         two => $fullName,
+         three => $pass
       );
       $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
       //header('Content-Type: application/json');
