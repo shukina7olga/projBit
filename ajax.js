@@ -9,21 +9,23 @@ form.addEventListener('submit', (event) => {
     body: new FormData(form)
   })
   .then(response => {
-    //console.log(response);
     return response.text();
   })
   .then(text => { 
     const formInp = document.querySelectorAll('.form-input');
+    let pars = JSON.parse(text);
 
-    if(text.length > 5) {
+    if(pars.result === 'success') {
       const wellCome = document.getElementById('wellCome');
       const wellComeH = document.getElementById('wellComeH');
+
       form.innerHTML = text;
       wellCome.classList.toggle('wellCome');
-      let pars = JSON.parse(text);
       wellComeH.append(` вы вошли как ${pars.two}`);
+
       return pars;
     }
+    
     formInp.forEach(el => {
       el.style.borderColor = "#fa0000";
     });
