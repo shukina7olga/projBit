@@ -9,28 +9,26 @@ form.addEventListener('submit', (event) => {
     body: new FormData(form)
   })
   .then(response => {
+    //console.log(response);
     return response.text();
   })
   .then(text => { 
-    const wellCome = document.getElementById('wellCome');
-    //const wellComeH = document.getElementById('wellComeH');
-    wellCome.classList.toggle('wellCome');
+    const formInp = document.querySelectorAll('.form-input');
 
-    form.innerHTML = text;
-
-    // if(text.status === 200) {
-    //   // const wellCome = document.getElementById('wellCome');
-    //   // wellCome.classList.toggle('wellCome');
-    //   //(console.log(`деляй ${pars.two}`)); 
-    //   let pars = JSON.parse(text);
-    //   console.log(pars);
-    //   return pars;
-    // }
-
-    let pars = JSON.parse(text);
-    wellCome.append(`Вы вошли как ${pars.two}`);
-
-    return pars;
+    if(text.length > 5) {
+      const wellCome = document.getElementById('wellCome');
+      const wellComeH = document.getElementById('wellComeH');
+      form.innerHTML = text;
+      wellCome.classList.toggle('wellCome');
+      let pars = JSON.parse(text);
+      wellComeH.append(` вы вошли как ${pars.two}`);
+      return pars;
+    }
+    formInp.forEach(el => {
+      el.style.borderColor = "#fa0000";
+    });
+    
+    return text;
   });
 
 }) 
