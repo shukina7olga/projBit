@@ -1,9 +1,12 @@
 const form = document.getElementById('formAj');
 
+
 form.addEventListener('submit', (event) => {
   
   event.preventDefault();
-  
+
+  document.querySelectorAll('.error').forEach(el => el.remove());
+
   fetch('backend.php', {
     method: 'POST',
     body: new FormData(form)
@@ -19,11 +22,13 @@ form.addEventListener('submit', (event) => {
 
     if(pars.status === 'success') {
       wellCome.classList.toggle('wellCome');
-      form.innerHTML =`Вы вошли как ${pars.data.full_name}`;
+      form.innerHTML = `Вы вошли как ${pars.data.full_name}`;
+
     } else { 
-      const errMess = document.createElement('div');
-      form.append(errMess);
       formInp.forEach(el => {el.style.borderColor = "#fa0000";});
+      const errMess = document.createElement('p');
+      errMess.className = 'error';
+      form.append(errMess);
       errMess.innerHTML = pars.message;
     }
 
