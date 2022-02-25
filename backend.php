@@ -3,10 +3,10 @@
    $login = 'barsum';
    $pass = '123';
    $fullName = 'Иванов Иван Васильевич';
-   $result = 'success';
+   $result;
 
    $arr = array(
-      result => $resultl,
+      result => $result,
       one => $name,
       two => $fullName,
       three => $pass
@@ -16,7 +16,7 @@
       $arr[result] = 'success';
       $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
       echo $json;
-      
+
    } else {
       $arr[result] = 'error';
       $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
