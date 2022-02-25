@@ -3,25 +3,26 @@
    $login = 'barsum';
    $pass = '123';
    $fullName = 'Иванов Иван Васильевич';
-   $result;
+
 
    $arr = array(
-      result => $result,
-      one => $name,
-      two => $fullName,
-      three => $pass
+      'status' => 'error',
+      'data' => [],
+      'message' => ''
    );
    
    if($pass === $_POST['pass'] && $login === $_POST['login']) {     
-      $arr[result] = 'success';
-      $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
-      echo $json;
+      $arr['status'] = 'success';
+      $arr['data'] = [
+         'full_name' => $fullName
+      ];
 
    } else {
-      $arr[result] = 'error';
-      $json = json_encode($arr, JSON_UNESCAPED_UNICODE);
-      echo $json;
+      $arr['status'] = 'error';
+      $arr['message'] = 'неверный логин или пароль';
    }
 
+  echo $json = json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+   
 ?> 
 

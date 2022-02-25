@@ -13,28 +13,23 @@ form.addEventListener('submit', (event) => {
   })
   .then(text => { 
     const formInp = document.querySelectorAll('.form-input');
+    const wellCome = document.querySelector('.wellCome');
+
     let pars = JSON.parse(text);
 
-    if(pars.result === 'success') {
-      const wellCome = document.getElementById('wellCome');
-      const wellComeH = document.getElementById('wellComeH');
-
-      form.innerHTML = text;
+    if(pars.status === 'success') {
       wellCome.classList.toggle('wellCome');
-      wellComeH.append(` вы вошли как ${pars.two}`);
-
-      return pars;
+      form.innerHTML =`Вы вошли как ${pars.data.full_name}`;
+    } else { 
+      const errMess = document.createElement('div');
+      form.append(errMess);
+      formInp.forEach(el => {el.style.borderColor = "#fa0000";});
+      errMess.innerHTML = pars.message;
     }
-    
-    formInp.forEach(el => {
-      el.style.borderColor = "#fa0000";
-    });
-    
-    return text;
+
   });
 
 }) 
-  
   
 
 
