@@ -1,11 +1,15 @@
 <?php 
 
-   $pass = $_POST['pass'];
-   $login = $_POST['login'];
+   $pass = trim($_POST['pass']) ;
+   $login = trim($_POST['login']);
 
    
    $mysql = new mysqli('127.0.0.1', 'root', 'password', 'mybit');
-   $result = $mysql->query("SELECT * FROM `users` WHERE `user_login` = '$login' AND `user_pass` = '$pass'"); // записи в  формате объекта
+
+   $result = $mysql->prepare("SELECT * FROM `users` WHERE `user_login` = ? AND `user_pass` = ?"); // шаблон запроса
+   $result->bind_param('ss', $login, $pass);
+   $result->execute();
+   $result = $result->get_result(); 
    $user = $result->fetch_assoc(); // конвертируем данные в массив
    
 
