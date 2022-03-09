@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,7 +16,7 @@
 <body>
 
     <form  class="form" action="backend.php" name="authf" method="post" id="formAj">
-        <h2>Форма авторизации</h2>
+        <h2>Вы не авторизированы, авторизуйтесь</h2>
         <label class="form-label">Логин
             <input class="form-input" type="text" name="login" id="loginId">
         </label>
@@ -23,9 +28,11 @@
 
     <div class='fault wellCome'>
         <h2>Добро пожаловать</h2>
-        <a class='fault-btn' href='/index.html'>Войти как другой пользователь</a>
+        <a class='fault-btn' href='/auth.php'>Войти как другой пользователь</a>
      </div>
 
     <script src="ajax.js"></script>
 </body>
 </html>
+
+
