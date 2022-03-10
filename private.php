@@ -1,6 +1,6 @@
 <?php 
     session_start();
- 
+    $ses_fullName = $_SESSION['user']['user_fullName'];
 ?>
 
 <!DOCTYPE html>
@@ -15,23 +15,12 @@
 </head>
 <body>
 
-    <form  class="form" action="backend.php" name="authf" method="post" id="formAj">
-        <h2>Вы не авторизированы, авторизуйтесь</h2>
-        <label class="form-label">Логин
-            <input class="form-input" type="text" name="login" id="loginId">
-        </label>
-        <label class="form-label">Пароль
-            <input class="form-input" type="password" name="pass" id="passId">
-        </label>
-        <p><input type="submit" class="form-btn"/></p>
-    </form>
+    <div class='fault'>
+        <h2>Добро пожаловать <?=$ses_fullName?></h2>
+        <a class='fault-btn' href='/logout.php'>Выйти</a>
+    </div>
 
-    <div class='fault wellCome'>
-        <h2>Добро пожаловать</h2>
-        <a class='fault-btn' href='/auth.php'>Войти как другой пользователь</a>
-     </div>
-
-    <script src="ajax.js"></script>
+ 
 </body>
 </html>
 

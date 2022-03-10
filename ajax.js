@@ -16,13 +16,14 @@ form.addEventListener('submit', (event) => {
   })
   .then(text => { 
     const formInp = document.querySelectorAll('.form-input');
-    const wellCome = document.querySelector('.wellCome');
+    //const wellCome = document.querySelector('.wellCome');
 
     let pars = JSON.parse(text);
 
     if(pars.status === 'success') {
-      wellCome.classList.toggle('wellCome');
+     // wellCome.classList.toggle('wellCome');
       form.innerHTML = `Вы вошли как ${pars.data.full_name}`;
+      location.reload(true);
 
     } else { 
       formInp.forEach(el => {el.style.borderColor = "#fa0000";});

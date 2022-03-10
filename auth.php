@@ -1,11 +1,10 @@
 <?php
     session_start();
-    print_r($_SESSION);
-    if($_SESSION['user']['status'] === '0') {
-        header('Location: http://studybit/private.php');
+    
+    if(isset($_SESSION['user'])) {
+        header('Location: /private.php');
     }
 
-   $ses_fullName = $_SESSION['user']['user_fullName'];
 ?>
 
 
@@ -21,7 +20,7 @@
 </head>
 <body>
 
-    <form  class="form" action="backend.php" name="authf" method="post" id="formAj">
+    <form  class="form"  name="authf" method="post" id="formAj">
         <h2>Форма авторизации</h2>
         <label class="form-label">Логин
             <input class="form-input" type="text" name="login" id="loginId">
@@ -32,10 +31,6 @@
         <p><input type="submit" class="form-btn"/></p>
     </form>
 
-    <div class='fault wellCome'>
-        <h2>Добро пожаловать <?= $ses_fullName?></h2>
-        <a class='fault-btn' href='/auth.php'>Войти как другой пользователь</a>
-     </div>
 
     <script src="ajax.js"></script>
 </body>

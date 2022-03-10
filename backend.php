@@ -26,7 +26,7 @@
 
 
    $ses_arr = array(
-      'status' => '0',
+      'status' => 'false',
       'user_id' => $user['user_id'],
       'user_name' => $user['user_name'],
       'user_fullName' => $user['user_fullName'],
@@ -43,7 +43,7 @@
          'full_name' => $fullName
       ];
 
-      $ses_arr['status'] = '1';
+      $ses_arr['status'] = 'true';
 
    } else {
       $arr['status'] = 'error';
@@ -59,6 +59,8 @@
   //session_destroy(); // закрыть сессию
    
 ?> 
+
+
 
 
 
