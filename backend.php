@@ -31,7 +31,12 @@
       'user_name' => $user['user_name'],
       'user_fullName' => $user['user_fullName'],
       'user_login' => $user['user_login'],
-      'user_pass' => $user['user_pass']
+      'user_pass' => $user['user_pass'],
+
+      'user_birth' => $user['user_birth'],
+      'user_gend' => (int)$user['user_gend'],
+      'user_mail' => $user['user_mail'],
+      'user_phone' => $user['user_phone']
    );
 
    
