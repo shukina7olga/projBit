@@ -1,6 +1,12 @@
 <?php 
     session_start();
+
+    if(isset(!$_SESSION['user'])) {
+        header('Location: /auth.php');
+    }
+
     $ses_fullName = $_SESSION['user']['user_fullName'];
+
 ?>
 
 <!DOCTYPE html>
