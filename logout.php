@@ -5,4 +5,6 @@
 
     header('Location: /auth.php');
 
+    session_destroy();
+
 ?>
