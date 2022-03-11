@@ -2,17 +2,8 @@
     include './main/header.php';
     session_start();
     
-    $ses_name = $_SESSION['user']['user_name'];
-    $ses_fullName = $_SESSION['user']['user_fullName'];
-    $bDate = new DateTime($_SESSION['user']['user_birth'], new DateTimeZone('Europe/Moscow')); // указываем часовой пояс
-    $ses_birth = $bDate->format("d.m.Y"); // сделать вывод даты без времени
-    $ses_mail = $_SESSION['user']['user_mail'];
-    $ses_phone = $_SESSION['user']['user_phone'];
-    if($_SESSION['user']['user_gend'] === 1) {
-        $ses_gend = 'мужчина';
-    } else {
-        $ses_gend = 'женщина';
-    }
+    $get_arr = getData();
+    
 ?>
 
 
@@ -28,12 +19,12 @@
 <body>
     <h1>Информация об аккаунте</h1>
     <div>
-        <p>Имя пользователя: <?= $ses_name ?></p>
-        <p>Полное имя: <?= $ses_fullName ?></p>
-        <p>Дата рождения: <?= $ses_birth ?></p>
-        <p>Пол: <?= $ses_gend ?></p>
-        <p>Почта: <?= $ses_mail ?></p>
-        <p>Телефон: <?= $ses_phone ?></p>
+        <p>Никнейм пользователя: <?= $get_arr['ses_name'] ?></p>
+        <p>Полное имя: <?= $get_arr['ses_fullName'] ?></p>
+        <p>Дата рождения: <?= $get_arr['ses_birth'] ?></p>
+        <p>Пол: <?= $get_arr['ses_gend'] ?></p>
+        <p>Почта: <?= $get_arr['ses_mail'] ?></p>
+        <p>Телефон: <?= $get_arr['ses_phone'] ?></p>
     </div>
     <a class='fault-btn' href='/private.php'>Назад</a>
     <a class='fault-btn' href='/logout.php'>Выйти</a>
