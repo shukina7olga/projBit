@@ -1,5 +1,5 @@
 <?php 
-   include './main/functions.php';
+   include './main/header.php';
    session_start();
 
    $pass = trim($_POST['pass']) ;
@@ -30,14 +30,14 @@
       $arr['data'] = [
          'full_name' => $fullName
       ];
+      getData($user);
 
    } else {
       $arr['status'] = 'error';
       $arr['message'] = 'неверный логин или пароль';
    }
 
-   $_SESSION['user'] = getData($user);
-
+   
   echo $json = json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
   $mysql->close(); // закрыть соединение

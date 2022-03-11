@@ -5,8 +5,8 @@
     }
 
     
-    function getData($user) {   
-        return $ses_arr = array(
+    function getData($user) {     
+        $ses_arr = array(
             'user_id' => $user['user_id'],
             'user_name' => $user['user_name'],
             'user_fullName' => $user['user_fullName'],
@@ -17,5 +17,7 @@
             'user_mail' => $user['user_mail'],
             'user_phone' => $user['user_phone']
         );
+        $_SESSION['user'] = $ses_arr;
+        return $_SESSION['user'];
     }
 ?>

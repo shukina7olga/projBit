@@ -1,5 +1,5 @@
 <?php
-    include './main/functions.php';
+    include './main/header.php';
     session_start();
     
     if(isAuth()) {

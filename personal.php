@@ -1,4 +1,5 @@
 <?php
+    include './main/header.php';
     session_start();
     
     $ses_name = $_SESSION['user']['user_name'];
