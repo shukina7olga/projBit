@@ -30,19 +30,17 @@
       $arr['data'] = [
          'full_name' => $fullName
       ];
-      setData($user);
+      setData($user);   
 
    } else {
       $arr['status'] = 'error';
       $arr['message'] = 'неверный логин или пароль';
    }
 
-   
   echo $json = json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
   $mysql->close(); // закрыть соединение
-
-   
+  
 ?> 
 
 

@@ -4,6 +4,10 @@
     
     $get_arr = getData();
     
+    if(!isAuth()) {
+        header('Location: /auth.php');
+    }
+    
 ?>
 
 
