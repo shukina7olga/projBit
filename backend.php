@@ -1,5 +1,5 @@
 <?php 
-
+   include './main/functions.php';
    session_start();
 
    $pass = trim($_POST['pass']) ;
@@ -24,23 +24,6 @@
       'message' => ''
    ); 
 
-
-   $ses_arr = array(
-      'status' => 'false',
-      'user_id' => $user['user_id'],
-      'user_name' => $user['user_name'],
-      'user_fullName' => $user['user_fullName'],
-      'user_login' => $user['user_login'],
-      'user_pass' => $user['user_pass'],
-
-      'user_birth' => $user['user_birth'],
-      'user_gend' => (int)$user['user_gend'],
-      'user_mail' => $user['user_mail'],
-      'user_phone' => $user['user_phone']
-   );
-
-   
-
    
    if(count($user) !== 0) {     
       $arr['status'] = 'success';
@@ -48,20 +31,17 @@
          'full_name' => $fullName
       ];
 
-      $ses_arr['status'] = 'true';
-
    } else {
       $arr['status'] = 'error';
       $arr['message'] = 'неверный логин или пароль';
    }
 
-   $_SESSION['user'] = $ses_arr;
+   $_SESSION['user'] = getData($user);
 
   echo $json = json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
   $mysql->close(); // закрыть соединение
 
-  //session_destroy(); // закрыть сессию
    
 ?> 
 

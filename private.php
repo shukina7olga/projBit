@@ -1,7 +1,8 @@
 <?php 
+    include './main/functions.php';
     session_start();
 
-    if(!$_SESSION['user']) {
+    if(!isAuth()) {
         header('Location: /auth.php');
     }
 

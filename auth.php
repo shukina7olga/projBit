@@ -1,7 +1,8 @@
 <?php
+    include './main/functions.php';
     session_start();
     
-    if(isset($_SESSION['user'])) {
+    if(isAuth()) {
         header('Location: /private.php');
     }
 

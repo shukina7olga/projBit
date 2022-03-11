@@ -5,6 +5,6 @@
 
     header('Location: /auth.php');
 
-    session_destroy();
+    session_destroy(); // закрываем сессию
 
 ?>
