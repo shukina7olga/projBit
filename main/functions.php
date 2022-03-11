@@ -5,7 +5,7 @@
     }
 
     
-    function getData($user) {     
+    function setData($user) {     
         $ses_arr = array(
             'user_id' => $user['user_id'],
             'user_name' => $user['user_name'],

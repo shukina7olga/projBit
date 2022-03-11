@@ -24,13 +24,13 @@
       'message' => ''
    ); 
 
-   
+
    if(count($user) !== 0) {     
       $arr['status'] = 'success';
       $arr['data'] = [
          'full_name' => $fullName
       ];
-      getData($user);
+      setData($user);
 
    } else {
       $arr['status'] = 'error';
