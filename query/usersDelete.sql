@@ -1,1 +1,1 @@
-delete from users
+truncate table users
