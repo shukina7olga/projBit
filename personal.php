@@ -32,5 +32,7 @@
     </div>
     <a class='fault-btn' href='/private.php'>Назад</a>
     <a class='fault-btn' href='/logout.php'>Выйти</a>
+
+    <?php include "./main/footer.php"?>
 </body>
 </html>

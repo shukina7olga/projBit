@@ -20,7 +20,7 @@
 
 </head>
 <body>
-
+    
     <form  class="form"  name="authf" method="post" id="formAj">
         <h2>Форма авторизации</h2>
         <label class="form-label">Логин
@@ -32,6 +32,7 @@
         <p><input type="submit" class="form-btn"/></p>
     </form>
 
+    <?php include "./main/footer.php"?>
 
     <script src="ajax.js"></script>
 </body>
