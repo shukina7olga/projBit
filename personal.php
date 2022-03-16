@@ -1,5 +1,4 @@
 <?php
-    include './main/header.php';
     session_start();
     
     $get_arr = getData();
@@ -11,16 +10,8 @@
 ?>
 
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Информация об аккаунте</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<?php include "./main/header.php"?>
+
     <h1>Информация об аккаунте</h1>
     <div>
         <p>Никнейм пользователя: <?= $get_arr['ses_name'] ?></p>
@@ -33,6 +24,4 @@
     <a class='fault-btn' href='/private.php'>Назад</a>
     <a class='fault-btn' href='/logout.php'>Выйти</a>
 
-    <?php include "./main/footer.php"?>
-</body>
-</html>
+<?php include "./main/footer.php"?>

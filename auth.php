@@ -1,5 +1,4 @@
-<?php
-    include './main/header.php';
+<?php  
     session_start();
     
     if(isAuth()) {
@@ -8,18 +7,7 @@
 
 ?>
 
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projBit</title>
-    <link rel="stylesheet" href="style.css">
-
-</head>
-<body>
+<?php include "./main/header.php"?>
     
     <form  class="form"  name="authf" method="post" id="formAj">
         <h2>Форма авторизации</h2>
@@ -31,12 +19,12 @@
         </label>
         <p><input type="submit" class="form-btn"/></p>
     </form>
-
-    <?php include "./main/footer.php"?>
-
     <script src="ajax.js"></script>
-</body>
-</html>
+
+<?php include "./main/footer.php"?>
+
+  
+
 
 
 
