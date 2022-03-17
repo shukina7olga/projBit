@@ -5,7 +5,7 @@
 <div class=" ">
     <div class="row mb-5"> 
         <div class="col-md-3 " >
-            <img class="img-thumbnail" src="https://funik.ru/wp-content/uploads/2018/10/17478da42271207e1d86.jpg" alt="">            
+            <img class="img-thumbnail" src="https://www.anypics.ru/download.php?file=201210/2560x1440/anypics.ru-9284.jpg" alt="">            
         </div>
         <div class="col-md-9">
             <h2 class="header text-center">Заголовок1</h2>
