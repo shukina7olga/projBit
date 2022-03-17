@@ -1,4 +1,4 @@
-/*Таблица пользователей users*/
+/*Таблица постов posts*/
 create table posts
 (
     /*user_id - первичный ключ, целое число с 
@@ -6,6 +6,7 @@ create table posts
     id int NOT NULL auto_increment primary key,
     id_user varchar(255) NOT NULL, /*имя пользователя*/
     date_create timestamp default now() NOT NULL, /*дата создания */
+    date_update timestamp default now() NOT NULL,
     title varchar(255) NOT NULL, /*заголовок*/
     prev_text varchar(255) NOT NULL, /*видимый краткий текст*/
     detal_text varchar(255) NOT NULL, /*спрятанный весь текст*/

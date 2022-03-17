@@ -1,9 +1,10 @@
 <?php 
     session_start();
 
-    //$get_arr = getData();
+    include "./../main/header.php";
+    $get_arr = getData();
 
-    include "./../main/header.php"
+    
 ?>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center">

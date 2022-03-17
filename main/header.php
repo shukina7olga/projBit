@@ -1,3 +1,4 @@
+<?php include "functions.php"?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -16,8 +17,8 @@
             <img src="https://gorodrabot.ru/images/company_photo/2495.png" class="navbar-brand"  loading="lazy" alt="первый бит" width="20%">
             
             <nav class="nav">
-                <a class="nav-link" href="#">Link1</a>
-                <a class="nav-link" href="#">Link2</a>
+                <a class="nav-link" href="./../index.php">Домой</a>
+                <a class="nav-link" href="./../auth.php">Авторизация</a>
                 <a class="nav-link" href="#">Link3</a>
             </nav>
         </div>

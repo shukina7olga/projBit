@@ -1,13 +1,13 @@
 <?php  
     session_start();
     
+    include "./main/header.php";
+
     if(isAuth()) {
         header('Location: /private.php');
-    }
+    } 
 
 ?>
-
-<?php include "./main/header.php"?>
     
     <form  class="form"  name="authf" method="post" id="formAj">
         <h2>Форма авторизации</h2>
