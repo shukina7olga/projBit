@@ -7,7 +7,7 @@ create table posts
     id_user varchar(255) NOT NULL, /*имя пользователя*/
     date_create timestamp default now() NOT NULL, /*дата создания */
     title varchar(255) NOT NULL, /*заголовок*/
-    prev_text char(255) NOT NULL, /*видимый краткий текст*/
-    detal_text char(255) NOT NULL, /*спрятанный весь текст*/
-    img char(255) /*картинка к посту*/
+    prev_text varchar(255) NOT NULL, /*видимый краткий текст*/
+    detal_text varchar(255) NOT NULL, /*спрятанный весь текст*/
+    img varchar(255) /*картинка к посту*/
 );
