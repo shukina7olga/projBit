@@ -5,7 +5,7 @@
 <div class=" ">
     <div class="row mb-5"> 
         <div class="col-md-3 " >
-            <img class="img-thumbnail" src="https://telegrator.ru/wp-content/uploads/2021/05/chat_avatar-136.jpg" alt="">            
+            <img class="img-thumbnail" src="https://www.anypics.ru/download.php?file=201210/2560x1440/anypics.ru-9284.jpg" alt="">            
         </div>
         <div class="col-md-9">
             <h2 class="header text-center">Заголовок1</h2>
