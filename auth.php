@@ -1,6 +1,4 @@
-<?php  
-    session_start();
-    
+<?php   
     include "./main/header.php";
 
     if(isAuth()) {

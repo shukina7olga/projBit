@@ -1,4 +1,8 @@
-<?php include "functions.php"?>
+<?php 
+    session_start();
+    include "functions.php";
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>

@@ -1,16 +1,13 @@
 <?php
-    session_start();
-    
-    $get_arr = getData();
+    include "./../main/header.php";
     
     if(!isAuth()) {
         header('Location: /auth.php');
     }
     
+    $get_arr = getData();
+    
 ?>
-
-
-<?php include "./main/header.php"?>
 
     <h1>Информация об аккаунте</h1>
     <div>

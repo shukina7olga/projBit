@@ -1,6 +1,5 @@
 <?php 
    include './main/header.php';
-   session_start();
 
    $pass = trim($_POST['pass']) ;
    $login = trim($_POST['login']);
