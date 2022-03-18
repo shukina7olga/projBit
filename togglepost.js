@@ -1,6 +1,16 @@
-const postH = document.getElementById('postH');
-const postText = document.getElementById('postText');
+// скрипт для постов блога. в стандартном состоянии пост свёрнут (отображается только заголовок), 
+// при клике разворачивается, при повторном клике – сворачивается. Единовременно может быть развёрнут только один пост
 
-postH.forEach(el => {
 
+const postSection = document.querySelectorAll('.post-section');
+
+postSection.forEach(post => {
+    post.addEventListener('click', e => {
+
+        postSection.forEach(post => {
+            post.classList.remove('opened');
+        })
+
+        e.target.closest('.post-section').classList.add('opened');
+    });
 });

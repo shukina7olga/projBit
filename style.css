@@ -59,4 +59,22 @@
 .wellCome {
     display: none;
 }
-/**/
+
+
+.post-h {
+    background-color: aliceblue;
+}
+
+.post-h:hover {
+    background-color: rgb(211, 211, 211);
+    cursor: pointer;
+}
+
+.post-body {
+    overflow: hidden;
+    height: 0;
+}
+
+.opened .post-body {
+    height: auto;
+}
