@@ -1,11 +1,11 @@
 <?php 
    include './main/header.php';
-
+   include './main/db.php';
+   
    $pass = trim($_POST['pass']) ;
    $login = trim($_POST['login']);
 
    
-   $mysql = new mysqli('127.0.0.1', 'root', 'password', 'mybit');
 
    $result = $mysql->prepare("SELECT * FROM `users` WHERE `user_login` = ? AND `user_pass` = ?"); // шаблон запроса
    $result->bind_param('ss', $login, $pass);
