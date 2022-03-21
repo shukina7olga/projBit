@@ -4,7 +4,9 @@
 }
 
 .form-input {
-    outline: none; border: 5px double #000000;
+    outline: none; 
+    border: 2px solid #000000;
+    border-radius: 5px;
 }
 
 .form {

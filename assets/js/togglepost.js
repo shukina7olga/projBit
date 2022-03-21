@@ -6,11 +6,14 @@ const postSection = document.querySelectorAll('.post-section');
 
 postSection.forEach(post => {
     post.addEventListener('click', e => {
-
-        postSection.forEach(post => {
-            post.classList.remove('opened');
+        
+        document.querySelectorAll('.post-section.opened').forEach(opened => {
+           opened.classList.remove('opened');          
         })
 
         e.target.closest('.post-section').classList.add('opened');
+
     });
 });
+
+

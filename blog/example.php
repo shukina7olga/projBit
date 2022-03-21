@@ -57,5 +57,6 @@
 
 </div>
 
-<script src="./../togglepost.js"></script>
+<script src="./../assets/js/togglepost.js"></script>
 <?php include "./../main/footer.php"?>
+

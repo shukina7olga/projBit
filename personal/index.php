@@ -18,7 +18,7 @@
         <p>Почта: <?= $get_arr['ses_mail'] ?></p>
         <p>Телефон: <?= $get_arr['ses_phone'] ?></p>
     </div>
-    <a class='fault-btn' href='/private.php'>Назад</a>
-    <a class='fault-btn' href='/logout.php'>Выйти</a>
+    <a class='btn btn-outline-secondary' href='/private.php'>Назад</a>
+    <a class='btn btn-outline-secondary' href='/logout.php'>Выйти</a>
 
 <?php include "./main/footer.php"?>

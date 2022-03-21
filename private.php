@@ -11,8 +11,8 @@
 
     <div class='fault'>
         <h2>Добро пожаловать <?=$ses_fullName?></h2>
-        <a class='fault-btn' href='/logout.php'>Выйти</a>
-        <a class='fault-btn' href='/personal/index.php'>Информация</a>
+        <a class='btn btn-outline-secondary' href='/logout.php'>Выйти</a>
+        <a class='btn btn-outline-secondary' href='/personal/index.php'>Информация</a>
     </div>
 
 <?php include "./main/footer.php"?>

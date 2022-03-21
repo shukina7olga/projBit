@@ -15,9 +15,9 @@
         <label class="form-label">Пароль
             <input class="form-input" type="password" name="pass" id="passId">
         </label>
-        <p><input type="submit" class="form-btn"/></p>
+        <p><input type="submit" class="btn btn-outline-secondary"/></p>
     </form>
-    <script src="ajax.js"></script>
+    <script src="./../assets/js/ajax.js"></script>
 
 <?php include "./main/footer.php"?>
 
