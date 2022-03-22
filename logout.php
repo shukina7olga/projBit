@@ -3,7 +3,7 @@
 
     $_SESSION = [];
 
-    header('Location: /auth.php');
+    header('Location: ./../auth.php');
 
     session_destroy(); // закрываем сессию
 
