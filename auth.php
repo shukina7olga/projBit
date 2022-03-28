@@ -1,9 +1,10 @@
 <?php   
     include "./main/header.php";
 
-    if(isAuth()) {
-        header('Location: /private.php');
-    } 
+    // ЗАМЕНИТЬ НА МЕТОД ИЗ USER
+    // if(isAuth()) {
+    //     header('Location: /private.php');
+    // } 
 
 ?>
     
@@ -17,6 +18,7 @@
         </label>
         <p><input type="submit" class="btn btn-outline-secondary"/></p>
     </form>
+    <a href="./../register.php">Зарегистрироваться</a>
     <script src="./../assets/js/ajax.js"></script>
 
 <?php include "./main/footer.php"?>
