@@ -40,7 +40,7 @@
 				'user_login' => $user['user_login'],
 				'user_pass' => $user['user_pass'],
 				'user_birth' => $user['user_birth'],
-				'user_gend' => (int)$user['user_gend'],
+				'user_gend' => (int)$user['user_gend'], // ??получить значение
 				'user_mail' => $user['user_mail'],
 				'user_phone' => $user['user_phone'],
 				'user_activity' => $user['user_activity'],
@@ -65,7 +65,7 @@
 			$bDate = new DateTime($_SESSION['user']['user_birth'], new DateTimeZone('Europe/Moscow')); // указываем часовой пояс
 			$ses_birth = $bDate->format("d.m.Y"); // сделать вывод даты без времени
 	
-			if($_SESSION['user']['user_gend'] === 1) {
+			if($_SESSION['user']['user_gend'] === 1) { // ?? как сделать
 				$ses_gend = 'мужчина';
 			} else {
 				$ses_gend = 'женщина';
@@ -104,20 +104,30 @@
 			return $get_arr;	
 		}
 
+
 		// регистрируем пользователя. записывает данные в бд
 		// не забыть про filter_var 
 		public function register() 
 		{
+
+			function test_input($data) { // для очищения от лишних символов
+				$data = trim($data);
+				$data = stripslashes($data);
+				$data = htmlspecialchars($data);
+				return $data;
+			}
+
 			$err = array();
 
-			$reg_name = trim($_POST['reg_name']);
-			$reg_fullname = $_POST['reg_fullname'];
-			$reg_login = trim($_POST['reg_login']);
-			$reg_pass = trim($_POST['reg_pass']);
+			$reg_name = test_input($_POST['reg_name']);
+			$reg_fullname = htmlspecialchars($_POST['reg_fullname']);
+			$reg_login = test_input($_POST['reg_login']);
+			$reg_pass = test_input($_POST['reg_pass']);
 			$reg_birth = $_POST['reg_birth'];
-			$reg_gend = $_POST['reg_gend']; // СДЕЛАТЬ ВЫПАДАЮЩИЙ СПИСОК
-			$reg_mail = trim($_POST['reg_mail']);
-			$reg_phone = trim($_POST['reg_phone']);
+			$reg_gend = test_input($_POST['reg_gend']); // СДЕЛАТЬ ВЫПАДАЮЩИЙ СПИСОК
+			$reg_mail = test_input($_POST['reg_mail']);
+			$reg_phone = test_input($_POST['reg_phone']);
+
 
 
 			if(!preg_match("/^[0-9]+$/", $reg_pass) {
@@ -136,10 +146,10 @@
 			}
 
 			// Если нет ошибок, то добавляем в БД нового пользователя
-			if(count($err) == 0) {	
+			if(count($err) === 0) {	
 				//делаем двойное шифрование для пароля
 				$reg_pass = md5(md5($reg_pass));
-				mysql_query("INSERT INTO users SET 
+				mysql_query("INSERT INTO `users` SET 
 					user_name='".$reg_name"',
 					user_fullname='".$reg_fullname"',
 				 	user_login='".$reg_login."',
@@ -151,5 +161,64 @@
 				");
 			}	
 		}
+
+
+
+		// при условии, что будет ещё одна форма, где у кнопки отправки будет name="update" 
+		public function update()
+		{
+			if(isset($_POST["update"])) {
+
+				function test_input($data) { // для очищения от лишних символов
+					$data = trim($data);
+					$data = stripslashes($data);
+					$data = htmlspecialchars($data);
+					return $data;
+				}
+	
+				$err = array();
+	
+				$up_name = test_input($_POST['up_name']);
+				$up_fullname = htmlspecialchars($_POST['up_fullname']);
+				$up_login = test_input($_POST['up_login']);
+				$up_pass = test_input($_POST['up_pass']);
+				$up_birth = $_POST['up_birth'];
+				$up_gend = test_input($_POST['up_gend']); // СДЕЛАТЬ ВЫПАДАЮЩИЙ СПИСОК
+				$up_mail = test_input($_POST['up_mail']);
+				$up_phone = test_input($_POST['up_phone']);
+	
+	
+	
+				if(!preg_match("/^[0-9]+$/", $up_pass) {
+					$err[] = "Пароль может состоять только из цифр";
+				}
+	
+				if(!preg_match("/^[a-zA-Z]+$/", $up_login) {
+					$err[] = "Логин может состоять только из букв английского алфавита";
+				}
+				
+				//проверяем, не сущестует ли пользователя с таким логином
+				$query = mysql_query("SELECT COUNT(user_id) FROM users WHERE user_login='".mysql_real_escape_string($reg_login)."'");
+	
+				if(mysql_result($query, 0) > 0){
+					$err[] = "Пользователь с таким логином уже существует в базе данных";
+				}
+	
+				// Если нет ошибок, то добавляем в БД нового пользователя
+				if(count($err) === 0) {	
+
+				mysql_query("UPDATE `users` SET 
+					user_name='".$up_name"',
+					user_fullname='".$up_fullname"',
+				 	user_login='".$up_login."',
+					user_pass='".$up_pass"',
+					user_birth='".$up_birth"',  
+					user_gend='".$up_gend"',
+					user_mail='".$up_mail"',
+					user_phone='".$up_phone"'
+				");
+			}
+		}
+
 	}			
 ?>

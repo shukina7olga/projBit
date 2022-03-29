@@ -21,7 +21,10 @@
             <input class="form-input" type="date" name="reg_birth">
         </label>
         <label class="form-label">Пол
-            <input class="form-input" type="text" name="reg_gend">
+            <select class="form-input" type="text" name="reg_gend">
+                <option value="1">мужской</option>
+                <option value="0">женский</option>
+            </select>
         </label>
         <label class="form-label">Почта
             <input class="form-input" type="email" name="reg_mail">
@@ -31,6 +34,7 @@
         </label>
         <p><input type="submit" class="btn btn-outline-secondary"/></p>
     </form>
-    <script src="./../assets/js/ajax.js"></script>
+
+    <!-- <script src="./../assets/js/.js"></script>  создать файл-->
 
 <?php include "./main/footer.php"?>
