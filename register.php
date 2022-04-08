@@ -1,6 +1,4 @@
-<?php   
-    include "./main/header.php";
-?>
+<?php include "./main/header.php" ?>
     
     <form  class="form"  name="register" method="post" id="regForm">
         <h2>Форма регистрации</h2>
@@ -21,7 +19,7 @@
             <input class="form-input" type="date" name="reg_birth">
         </label>
         <label class="form-label">Пол
-            <select class="form-input" type="text" name="reg_gend" id="reg_gend">
+            <select class="form-input" type="text" name="reg_gend">
                 <option value="1">мужской</option>
                 <option value="0">женский</option>
             </select>
@@ -35,7 +33,9 @@
         <p><input type="submit" class="btn btn-outline-secondary"/></p>
     </form>
 
-    <!-- <script > вспомогашка, чтобы понять что приходит из селекта
+    <script src="./../assets/js/ajax_register.js"></script>
+
+    <!-- <script > вспомогашка, чтобы понять что приходит из селекта по полу
         document.getElementById('reg_gend').addEventListener('change', function() {
             const n = document.getElementById('reg_gend').value;
             console.log(n, typeof(n));
@@ -43,4 +43,4 @@
     </script> -->
     <!-- <script src="./../assets/js/.js"></script>  создать файл-->
 
-<?php include "./main/footer.php"?>
+<?php include "./main/footer.php" ?>
