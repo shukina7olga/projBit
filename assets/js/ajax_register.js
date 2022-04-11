@@ -16,7 +16,7 @@ form.addEventListener('submit', (event) => {
         const formInp = document.querySelectorAll('.form-input');
         let pars = JSON.parse(text);
         if(pars.status === 'success') {      
-         // location.reload(true); //метод перезагружает ресурс из текущего URL подобно кнопке обновления браузера    
+          location.reload(true); //метод перезагружает ресурс из текущего URL подобно кнопке обновления браузера    
         } else { 
           formInp.forEach(el => {el.style.borderColor = "#fa0000";});
           const errMess = document.createElement('p');

@@ -110,152 +110,57 @@
 		// не забыть про filter_var 
 		public function register() 
 		{
-			// $host = "127.0.0.1";
-			// $db_name = "mybit";
-			// $username = "root";
-			// $password = "password";
-			// $conn;
+			$mysql = new mysqli('127.0.0.1', 'root', 'password', 'mybit'); // хост, имя пользователя, пароль, имя бд
+
 		
-			// $this->conn = null;
-		
-			// try {
-			// 	$this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-			// 	$this->conn->exec("set names utf8");
-			// } catch (PDOException $exception) {
-			// 	echo "Connection error: " . $exception->getMessage();
-			// }
-
-			
-			if(isset($_POST['submit'])) {
-				$reg_name = $_POST['reg_name'];
-				$reg_fullname = $_POST['reg_fullname'];
-				$reg_login = $_POST['reg_login'];
-				$reg_pass = $_POST['reg_pass'];
-				$reg_birth = $_POST['reg_birth'];
-				$reg_gend = $_POST['reg_gend'];
-				$reg_mail = $_POST['reg_mail'];
-				$reg_phone = $_POST['reg_phone'];
+			$reg_name = $_POST['reg_name'];
+			$reg_fullname = $_POST['reg_fullname'];
+			$reg_login = $_POST['reg_login'];
+			$reg_pass = $_POST['reg_pass'];
+			$reg_birth = $_POST['reg_birth'];
+			$reg_gend = $_POST['reg_gend'];
+			$reg_mail = $_POST['reg_mail'];
+			$reg_phone = $_POST['reg_phone'];
 
 
-				$err = array();
+			$err = array();
 
 
-				if(!preg_match("/^[0-9]+$/", $reg_pass)) {
-					$err[] = "Пароль может состоять только из цифр";
-					// $err['err_field'] = $reg_pass;
-				}
-	
-				if(!preg_match("/^[a-zA-Z]+$/", $reg_login)) {
-					$err[] = "Логин может состоять только из букв английского алфавита";
-					// $err['err_field'] = $reg_login;
-				}
-	
-				if($reg_name === '') {
-					$err[] = "Заполните поле никнейм";
-					// $err['err_field'] = $reg_name;
-				}
-	
-				if($reg_fullname === '') {
-					$err[] = "Заполните поле ФИО";
-					// $err['err_field'] = $reg_fullname;
-				}
-	
-				if($reg_login === '') {
-					$err[] = "Заполните поле логин";
-					// $err['err_field'] = $reg_login;
-				}
-	
-				if($reg_pass === '') {
-					$err[] = "Заполните поле пароль";
-					// $err['err_field'] = $reg_pass;
-				}
-
-
-				$mysql = new mysqli('127.0.0.1', 'root', 'password', 'mybit');
-				if($mysql->connect_errno) {
-					echo "Произошла ошибка";
-					exit;
-				}
-				$name = '"' .$mysql->cubrid_real_escape_string($reg_name).'"';
-				$fullname = '"' .$mysql->cubrid_real_escape_string($reg_fullname).'"';
-				$login = '"' .$mysql->cubrid_real_escape_string($reg_login).'"';
-				$pass = '"' .$mysql->cubrid_real_escape_string($reg_pass).'"';
-				$birth = '"' .$mysql->cubrid_real_escape_string($reg_birth).'"';
-				$gend = '"' .$mysql->cubrid_real_escape_string($reg_gend).'"';
-				$mail = '"' .$mysql->cubrid_real_escape_string($reg_mail).'"';
-				$phone = '"' .$mysql->cubrid_real_escape_string($reg_phone).'"';
-
-				$query = "INSERT INTO users (user_name, user_fullname, user_login, user_pass, user_birth, user_gend, user_mail, user_phone) VALUES 
-				($name, $fullname, $login, $pass', $birth, $gend, $mail, $phone)";
-
-				if(count($err) === 0) {
-					$result = $mysql->($query);
-					if($result) {
-						print('успешно отправили');
-					}
-					$mysql->close();
-				}
+			if(!preg_match("/^[0-9]+$/", $reg_pass)) {
+				$err[] = "Пароль может состоять только из цифр";
+				// $err['err_field'] = $reg_pass;
 			}
 
-			
+			if(!preg_match("/^[a-zA-Z]+$/", $reg_login)) {
+				$err[] = "Логин может состоять только из букв английского алфавита";
+				// $err['err_field'] = $reg_login;
+			}
 
-			// echo '<pre>';
-			// var_export($mysql);
-			// echo '</pre>';
-			// function clear_input($data) { 
-			// 	$data = trim($data);
-			// 	$data = stripslashes($data);
-			// 	$data = htmlspecialchars($data);
-			// 	return $data;
-			// }
+			if($reg_name === '') {
+				$err[] = "Заполните поле никнейм";
+				// $err['err_field'] = $reg_name;
+			}
 
-			
+			if($reg_fullname === '') {
+				$err[] = "Заполните поле ФИО";
+				// $err['err_field'] = $reg_fullname;
+			}
 
-			// $reg_name = clear_input($_POST['reg_name']);
-			// $reg_fullname = htmlspecialchars($_POST['reg_fullname']);
-			// $reg_login = clear_input($_POST['reg_login']);
-			// $reg_pass = clear_input($_POST['reg_pass']);
-			// $reg_birth = $_POST['reg_birth'];
-			// $reg_gend = clear_input($_POST['reg_gend']);
-			// $reg_mail = clear_input($_POST['reg_mail']);
-			// $reg_phone = clear_input($_POST['reg_phone']);
+			if($reg_login === '') {
+				$err[] = "Заполните поле логин";
+				// $err['err_field'] = $reg_login;
+			}
 
+			if($reg_pass === '') {
+				$err[] = "Заполните поле пароль";
+				// $err['err_field'] = $reg_pass;
+			}
 
 
-			
-			//проверяем, не сущестует ли пользователя с таким логином
-			// $query = mysql_query("SELECT COUNT(user_id) FROM `users` WHERE user_login='".mysql_real_escape_string($reg_login)."'");
+			$query = mysqli_query($mysql, "INSERT INTO users (`user_name`, `user_fullname`, `user_login`, `user_pass`, `user_birth`, `user_gend`, `user_mail`, `user_phone`) VALUES 
+			('$reg_name', '$reg_fullname', '$reg_login', '$reg_pass', '$reg_birth', $reg_gend, '$reg_mail', '$reg_phone')");
+			$result = mysqli_fetch_array($query);
 
-			// if(mysql_result($query, 0) > 0){
-			// 	$err[] = "Пользователь с таким логином уже существует в базе данных";
-			// }
-
-			// Если нет ошибок, то добавляем в БД нового пользователя
-			// if(count($err) === 0) {	
-			// 	//делаем шифрование для пароля
-			// 	//$reg_pass = md5($reg_pass);
-			// 	// $str = "INSERT INTO users (user_name, user_fullname, user_login, user_pass, user_birth, user_gend, user_mail, user_phone) VALUES 
-			// 	// 	('$reg_name',
-			// 	// 	'$reg_fullname',
-			// 	//  	'$reg_login',
-			// 	// 	'$reg_pass',
-			// 	// 	'$reg_birth',  
-			// 	// 	$reg_gend,
-			// 	// 	'$reg_mail',
-			// 	// 	'$reg_phone')
-			// 	// ";
-			// 	// echo $str;
-			// 	$mysql->query("INSERT INTO users (user_name, user_fullname, user_login, user_pass, user_birth, user_gend, user_mail, user_phone) VALUES 
-			// 		('$reg_name',
-			// 		'$reg_fullname',
-			// 	 	'$reg_login',
-			// 		'$reg_pass',
-			// 		'$reg_birth',  
-			// 		$reg_gend,
-			// 		'$reg_mail',
-			// 		'$reg_phone')
-			// 	");
-			// }	
 			return $err;
 			
 		}
@@ -301,7 +206,7 @@
 	
 		
 
-				mysql_query("UPDATE users SET 
+				mysqli_query("UPDATE users SET 
 					user_name='.$up_name',
 					user_fullname='.$up_fullname',
 					user_pass='.$up_pass',
