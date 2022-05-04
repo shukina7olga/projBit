@@ -1,14 +1,14 @@
 <?php
 	class User
 	{
-		// // для очищения данных введенных в инпуты  ?? не понимаю как вызвать это в методе  login и register
-		// public function clear_input($data) 
-		// { 
-		// 	$data = trim($data);
-		// 	$data = stripslashes($data);
-		// 	$data = htmlspecialchars($data);
-		// 	return $data;
-		// }
+		// для очищения от лишних символов
+		public function test_input($data) 
+		{ 
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);   
+			return $data;
+		}
 
 		// проверяем авторизован ли пользователь. узнаем есть ли в сессии данные
 		public function isAuth() 
@@ -19,12 +19,12 @@
 
 		// если введенные логин и пароль совпали с тем, что в бд => забираем строку (запись) в переменную result и user уже массив этих данных одного пользователя
 		public function login($mysql) 
-		{     
-			$pass = trim($_POST['pass']) ;
-   			$login = trim($_POST['login']);
-
+		{    
+			//session_start(); // надо ли это  тут?
+			$pass = $this->test_input($_POST['pass']) ;
+   			$login = $this->test_input($_POST['login']);
 			$result = $mysql->prepare("SELECT * FROM `users` WHERE `user_login` = ? AND `user_pass` = ?"); // шаблон запроса
-			$result->bind_param('ss', $login, md5($pass));
+			$result->bind_param('ss', $login, $pass);
 			$result->execute();
 			$result = $result->get_result(); 
 			$user = $result->fetch_assoc(); // конвертируем данные в массив
@@ -40,7 +40,7 @@
 		}
 
 		// запись данных о пользователе в сессию
-		public function setData() 
+		public function setData($user) 
 		{     
 			$ses_arr = array(
 				'user_id' => $user['user_id'],
@@ -106,68 +106,76 @@
 		}
 
 
-		// регистрируем пользователя. записывает данные в бд
-		// не забыть про filter_var 
+		// регистрируем пользователя. записывает данные в бд. смотрим есть ли такой пользователь
 		public function register() 
 		{
-			$mysql = new mysqli('127.0.0.1', 'root', 'password', 'mybit'); // хост, имя пользователя, пароль, имя бд
+				
+			$mysql = mysqli_connect('127.0.0.1', 'root', 'password', 'mybit'); // без этого выдает ошибку. $query=false. нельзя подключать как отдельный файл db.php
 
-		
-			$reg_name = $_POST['reg_name'];
-			$reg_fullname = $_POST['reg_fullname'];
-			$reg_login = $_POST['reg_login'];
-			$reg_pass = $_POST['reg_pass'];
+			$reg_name = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_name']));
+			$reg_fullname = $this->test_input($_POST['reg_fullname']); 
+			$reg_login = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_login']));
+			$reg_pass = $this->test_input($_POST['reg_pass']);
 			$reg_birth = $_POST['reg_birth'];
 			$reg_gend = $_POST['reg_gend'];
-			$reg_mail = $_POST['reg_mail'];
-			$reg_phone = $_POST['reg_phone'];
-
-
+			$reg_mail = filter_var($_POST['reg_mail'], FILTER_SANITIZE_EMAIL);  
+			$reg_phone = $this->test_input($_POST['reg_phone']);
+		
+		
 			$err = array();
-
-
+		
+		
 			if(!preg_match("/^[0-9]+$/", $reg_pass)) {
 				$err[] = "Пароль может состоять только из цифр";
-				// $err['err_field'] = $reg_pass;
 			}
-
+		
 			if(!preg_match("/^[a-zA-Z]+$/", $reg_login)) {
 				$err[] = "Логин может состоять только из букв английского алфавита";
-				// $err['err_field'] = $reg_login;
 			}
-
+		
 			if($reg_name === '') {
 				$err[] = "Заполните поле никнейм";
-				// $err['err_field'] = $reg_name;
 			}
-
+		
 			if($reg_fullname === '') {
 				$err[] = "Заполните поле ФИО";
-				// $err['err_field'] = $reg_fullname;
 			}
-
+		
 			if($reg_login === '') {
 				$err[] = "Заполните поле логин";
-				// $err['err_field'] = $reg_login;
 			}
-
+		
 			if($reg_pass === '') {
 				$err[] = "Заполните поле пароль";
-				// $err['err_field'] = $reg_pass;
 			}
 
-
-			$query = mysqli_query($mysql, "INSERT INTO users (`user_name`, `user_fullname`, `user_login`, `user_pass`, `user_birth`, `user_gend`, `user_mail`, `user_phone`) VALUES 
-			('$reg_name', '$reg_fullname', '$reg_login', '$reg_pass', '$reg_birth', $reg_gend, '$reg_mail', '$reg_phone')");
-			$result = mysqli_fetch_array($query);
-
+			if($reg_birth === '') {
+				$err[] = "Заполните дату рождения";
+			}
+		
+			// проверяем есть ли такой пользователь
+			$query_check = mysqli_query($mysql, "SELECT * FROM `users` WHERE user_login = '{$reg_login}'");
+			$user_in_bd = mysqli_fetch_assoc($query_check);
+			if($user_in_bd !== NULL) {
+				$err[] = "Пользователь с таким логином уже существует в базе данных";
+			}   
+			
+			if(empty($err)) {
+				$query = mysqli_query($mysql, "INSERT INTO `users` (`user_activity`, `user_name`, `user_fullname`, `user_login`, `user_pass`, `user_birth`, `user_gend`, `user_mail`, `user_phone`) VALUES 
+				(1, '{$reg_name}', '{$reg_fullname}', '{$reg_login}', '{$reg_pass}', '{$reg_birth}', {$reg_gend}, '{$reg_mail}', '{$reg_phone}')");
+				if ($query) {
+					// echo '<p>Данные успешно добавлены в таблицу<p>'; С ЭТОЙ СТРОЧКОЙ НЕ ПАРСИТ. ПРИ ПАРСИНГЕ НАЧИНАЕТ ПИХАТЬ ЭТУ СТРОКУ
+				} else {
+					echo '<p>Произошла ошибка: ' . mysqli_error($mysql) . '</p>';
+				} 
+			}
 			return $err;
 			
 		}
 
 
 
-		// при условии, что будет ещё одна форма с уменьшенным числом инпутов (логина не будет)
+		// при условии, что будет сверстана ещё одна форма с уменьшенным числом инпутов (логина не будет)
 		//, где у кнопки отправки будет name="update" 
 		public function update()
 		{

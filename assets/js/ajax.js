@@ -21,9 +21,9 @@ form.addEventListener('submit', (event) => {
     let pars = JSON.parse(text);
 
     if(pars.status === 'success') {
-     // wellCome.classList.toggle('wellCome');
+      //wellCome.classList.toggle('wellCome');
       form.innerHTML = `Вы вошли как ${pars.data.full_name}`;
-      location.reload(true);
+      //location.reload(true); // перезагрузка страницы после отправления данных
 
     } else { 
       formInp.forEach(el => {el.style.borderColor = "#fa0000";});
