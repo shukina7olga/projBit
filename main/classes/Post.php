@@ -13,30 +13,21 @@
 		{
 			global $mysql; //глобальная переменная, чтобы не передавать параметр
 			$getPost = mysqli_query($mysql, "SELECT * FROM `posts`"); // выбрали все данные по постах
-			
-			while ($row = mysqli_fetch_assoc($getPost)) {
-				$id = $row['id'];
-				$idUser = $row['id_user'];
-				$dateCreate = $row['date_create'];
-				$dateUpdate = $row['date_update'];
-				$title = $row['title'];
-				$prevText = $row['prev_text'];
-				$detalText = $row["detal_text"];
-				var_dump($row);
-			}
-			
+			$posts = mysqli_fetch_all($getPost, MYSQLI_ASSOC);
+			return $posts;
 		}
 
-		public function addPost($mysql) 
+		public function addPost() 
 		{
-			$id = $_SESSION['user']['user_id']; 
+			global $mysql;
+			$id_user = $_SESSION['user']['user_id']; 
 			$title = $this->test_input($_POST['title']);
-			$prevText = $this->test_input($_POST['prevText']);
-			$detalText = $this->test_input($_POST['detalText']);
+			$prev_text = $this->test_input($_POST['prev_text']);
+			$detal_text = $this->test_input($_POST['detal_text']);
 			$img = $_POST['img'];
 
 			$query = mysqli_query($mysql, "INSERT INTO `posts` (`id_user`, `title`, `prev_text`, `detal_text`, `img`) VALUES 
-				('{$id}', '{$title}', '{$prevTitle}', '{$detalTitle}', '{$img}')");
+				('{$id_user}', '{$title}', '{$prev_text}', '{$detal_text}', '{$img}')");
 			if ($query) {
 				// echo '<p>Данные успешно добавлены в таблицу<p>'; С ЭТОЙ СТРОЧКОЙ НЕ ПАРСИТ. ПРИ ПАРСИНГЕ НАЧИНАЕТ ПИХАТЬ ЭТУ СТРОКУ
 			} else {

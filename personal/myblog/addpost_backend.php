@@ -5,7 +5,7 @@
     session_start();
 
     $user = new Post;
-    $user->addPost($mysql);
+    $user->addPost();
 
     
 

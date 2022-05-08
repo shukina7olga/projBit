@@ -8,10 +8,10 @@
             <input class="form-input" type="text" name="title"> <!-- расширит в длину поле при вводе текста onkeydown="this.style.width = ((this.value.length + 1) * 8) + 'px';"-->
         </label>
         <label class="form-label">Краткое содержание
-            <textarea class="form-input" type="text" name="prevText"></textarea>
+            <textarea class="form-input" type="text" name="prev_text"></textarea>
         </label>
         <label class="form-label">Основное содержание
-            <textarea class="form-input" type="text" name="detalText"></textarea>
+            <textarea class="form-input" type="text" name="detal_text"></textarea>
         </label>
         <label class="form-label">Изображение
             <input class="form-input" type="file" name="img">

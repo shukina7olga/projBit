@@ -5,8 +5,7 @@
     session_start();
 
     $user = new Post;
-    $arr = $user->getPost();
-
+    $posts = $user->getPost();
 
     // $arrPost = array(
     //     'id' => [],
@@ -28,44 +27,47 @@
     // }
 
 
+
+    // public function getPost() 
+    // {
+    //     global $mysql; //глобальная переменная, чтобы не передавать параметр
+    //     $getPost = mysqli_query($mysql, "SELECT * FROM `posts`"); // выбрали все данные по постах
+        
+    //     while ($row = mysqli_fetch_assoc($getPost)) {
+    //         $id = $row['id'];
+    //         $idUser = $row['id_user'];
+    //         $dateCreate = $row['date_create'];
+    //         $dateUpdate = $row['date_update'];
+    //         $title = $row['title'];
+    //         $prevText = $row['prev_text'];
+    //         $detalText = $row["detal_text"];
+    //         var_dump($row);
+    //     }
+        
+    // }
+
     
 ?>
         
     <div>
+        <?php foreach($posts as $post): ?>
         <div class="post-section">
-            <h2 class="header text-center post-h">Заголовок1</h2>
+            <h2 class="header text-center post-h"><?=$post['title']?></h2>
             <div class="row post-body"> 
                 <div class="col-md-3">
                     <img class="img-thumbnail" src="https://www.anypics.ru/download.php?file=201210/2560x1440/anypics.ru-9284.jpg" alt="">            
                 </div>
                 <div class="col-md-9">
-                    <p class="lh-sm text-start post-text">Текст-рыба на русском языке. Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.
-                        Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста.</p>
+                    <p class="lh-sm text-start post-text"><?=$post['prev_text']?></p>
                     <div class="row" >
-                        <p class="col text-muted">имя пользователя</p>
-                        <p class="col text-muted">дата создания</p>
+                        <p class="col text-muted">имя пользователя <?=$post['id_user']?></p>
+                        <p class="col text-muted">дата создания <?=$post['date_create']?></p>
                         <!-- <button class="col btn btn-outline-secondary">Редактировать</button>    -->
                     </div>
                 </div>       
             </div>        
-        </div>    
-
-        <div class="post-section">
-            <h2 class="header text-center post-h">Заголовок2</h2>
-            <div class="row post-body"> 
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-9">  
-                    <p class="lh-sm text-start post-text">Текст-рыба на русском языке. Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.
-                        Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста.</p>
-                    <div class="row">
-                        <p class="col text-muted">имя пользователя</p>
-                        <p class="col text-muted">дата создания</p>
-                        <!-- <button class="col btn btn-outline-secondary">Редактировать</button>    -->
-                    </div>
-                </div>       
-            </div>
-        </div>
+        </div>   
+        <?php endforeach; ?>
     </div>
 
     <a class='btn btn-outline-secondary' href='./../../private.php'>Назад</a>
