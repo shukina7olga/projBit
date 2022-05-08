@@ -1,5 +1,5 @@
 <?php 
-   include './main/db.php'; // приходится подключать явно в методе user 
+   include './main/db.php'; 
    include './main/classes/User.php';
 
    $user = new User;

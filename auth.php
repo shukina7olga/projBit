@@ -1,10 +1,9 @@
 <?php   
     include "./main/header.php";
-
-    // ЗАМЕНИТЬ НА МЕТОД ИЗ USER
-    // if(isAuth()) {
-    //     header('Location: /private.php');
-    // } 
+    include './main/classes/User.php';
+    
+    $user = new User;
+    $user-> isAuth();
 
 ?>
     

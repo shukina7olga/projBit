@@ -24,6 +24,7 @@ form.addEventListener('submit', (event) => {
       //wellCome.classList.toggle('wellCome');
       form.innerHTML = `Вы вошли как ${pars.data.full_name}`;
       //location.reload(true); // перезагрузка страницы после отправления данных
+      window.location.href = './private.php';
 
     } else { 
       formInp.forEach(el => {el.style.borderColor = "#fa0000";});

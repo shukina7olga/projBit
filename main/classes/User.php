@@ -18,9 +18,10 @@
 
 
 		// если введенные логин и пароль совпали с тем, что в бд => забираем строку (запись) в переменную result и user уже массив этих данных одного пользователя
-		public function login($mysql) 
+		public function login() 
 		{    
 			//session_start(); // надо ли это  тут?
+			global $mysql;
 			$pass = $this->test_input($_POST['pass']) ;
    			$login = $this->test_input($_POST['login']);
 			$result = $mysql->prepare("SELECT * FROM `users` WHERE `user_login` = ? AND `user_pass` = ?"); // шаблон запроса
@@ -47,7 +48,7 @@
 				'user_name' => $user['user_name'],
 				'user_fullName' => $user['user_fullName'],
 				'user_login' => $user['user_login'],
-				'user_pass' => $user['user_pass'],
+				'user_pass' => $user['user_pass'], // наверное в сессии лучше не хранить пароль
 				'user_birth' => $user['user_birth'],
 				'user_gend' => (int)$user['user_gend'], // получаем либо 1 либо 0
 				'user_mail' => $user['user_mail'],
@@ -109,8 +110,7 @@
 		// регистрируем пользователя. записывает данные в бд. смотрим есть ли такой пользователь
 		public function register() 
 		{
-				
-			$mysql = mysqli_connect('127.0.0.1', 'root', 'password', 'mybit'); // без этого выдает ошибку. $query=false. нельзя подключать как отдельный файл db.php
+			global $mysql;	
 
 			$reg_name = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_name']));
 			$reg_fullname = $this->test_input($_POST['reg_fullname']); 

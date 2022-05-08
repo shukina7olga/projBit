@@ -1,11 +1,10 @@
 <?php
     include "./../main/header.php";
-    
-    if(!isAuth()) {
-        header('Location: /auth.php');
-    }
-    
-    $get_arr = getData();
+    include './../main/classes/User.php';
+ 
+    $user = new User;
+    $user-> isAuth();
+    $get_arr = $user-> getData();
     
 ?>
 

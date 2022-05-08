@@ -1,10 +1,8 @@
 <?php
     session_start();
-
-    $_SESSION = [];
-
-    header('Location: ./../auth.php');
-
-    session_destroy(); // закрываем сессию
+    include './main/classes/User.php';
+    
+    $user = new User;
+    $user-> logout();
 
 ?>
