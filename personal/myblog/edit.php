@@ -2,8 +2,8 @@
     include "./../../main/header.php";
 ?>
         
-    <form  class="form"  name="" method="post" id="formPost">
-        <h2>Добавление поста</h2>
+    <form  class="form"  name="" method="post" id="formPostEdit">
+        <h2>Редактирование поста</h2>
         <label class="form-label form-label-post">Заголовок
             <input class="form-input" type="text" name="title"> <!-- расширит в длину поле при вводе текста onkeydown="this.style.width = ((this.value.length + 1) * 8) + 'px';"-->
         </label>
@@ -21,6 +21,6 @@
 
     <a class='btn btn-outline-secondary' href='./../../private.php'>Назад</a>
 
-    <script src="./../../assets/js/ajax_post.js"></script>
+    <script src="./../../assets/js/ajax_edit_post.js"></script>
 
 <?php include "./../../main/footer.php"?>

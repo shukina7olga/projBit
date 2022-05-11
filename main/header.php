@@ -22,7 +22,7 @@
             <nav class="nav">
                 <a class="nav-link" href="./../../index.php">Домой</a>
                 <a class="nav-link" href="./../../auth.php">Авторизация</a>
-                <a class="nav-link" href="./../../blog/example.php">Блог</a>
+                <a class="nav-link" href="./../../blog/index.php">Блог</a>
             </nav>
         </div>
   

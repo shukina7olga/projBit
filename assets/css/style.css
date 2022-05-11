@@ -3,6 +3,15 @@
     font-family: sans-serif;
 }
 
+.img-post {
+    display: block;
+    border-radius: 30%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center center;
+}
+
 .form-input {
     outline: none; 
     border: 2px solid #000000;
@@ -20,6 +29,10 @@
     display: flex; 
     flex-direction: column; 
     padding-bottom: 10px;
+}
+
+.form-label-post {
+    width: 70%;
 }
 
 .form-btn {

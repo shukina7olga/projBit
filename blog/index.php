@@ -1,30 +1,45 @@
 <?php 
     include "./../main/header.php";
+    include './../main/db.php';
+    include './../main/classes/Post.php';
 
-    $result = $mysql->prepare("SELECT * FROM `posts`"); // выбрали все данные по постах
-    $post = $result->fetch_assoc(); // конвертируем данные в массив
-    echo $post;
-
+    $user = new Post;
+    $posts = $user->getPost();
+    
 ?>
-
-
-<!-- для динамичного вывода постов в цикле с данными из БД -->
-    <div class="post-section">
-        <h2 class="header text-center post-h"></h2>
-        <div class="row post-body"> 
-            <div class="col-md-3">
-                <img class="img-thumbnail" src="https://www.anypics.ru/download.php?file=201210/2560x1440/anypics.ru-9284.jpg" alt="">            
-            </div>
-            <div class="col-md-9">
-                <p class="lh-sm text-start post-text">Текст-рыба на русском языке. Рыбатекст используется дизайнерами, проектировщиками и фронтендерами, когда нужно быстро заполнить макеты или прототипы содержимым.
-                    Это тестовый контент, который не должен нести никакого смысла, лишь показать наличие самого текста.</p>
-                <div class="row" >
-                    <p class="col text-muted">имя пользователя</p>
-                    <p class="col text-muted">дата создания</p>
-                    <!-- <button class="col btn btn-outline-secondary">Редактировать</button>    -->
+        
+    <div>
+        <?php foreach($posts as $post): ?>
+        <div class="post-section">
+            <h2 class="header text-center post-h"><?=$post['title']?></h2>
+            <div class="row post-body"> 
+                <div class="col-md-4">
+                    <img class="img-post" src=<?=$post['img']?> alt="">            
                 </div>
-            </div>       
-        </div>        
-    </div>  
+                <div class="col-md-8">
+                    <div class="row" >
+                        <p class="col text-muted">имя пользователя 
+                            <?php
+                                $id_user = $post['id_user'];
+                                $user_name = mysqli_query($mysql, "SELECT user_name FROM `users` WHERE user_id = '{$id_user}'");
+                                $user_namebd = mysqli_fetch_assoc($user_name);
+                                echo $user_namebd['user_name'];
+                            ?>
+                        </p>
+                        <p class="col text-muted">дата создания <?=$post['date_create']?></p>
+                        <p class="lh-sm text-start post-text"><?=$post['prev_text']?></p>
+                    </div>
+                </div>       
+            </div>        
+        </div>   
+        <?php endforeach; ?>
+    </div>
 
-<?php include "./../main/footer.php"?>
+    <a class='btn btn-outline-secondary' href='./../../private.php'>Назад</a>
+
+    <script src="./../../assets/js/togglepost.js"></script>
+    
+    
+
+
+<?php include "./../../main/footer.php"?>
