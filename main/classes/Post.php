@@ -37,7 +37,7 @@
 			$detal_text = $this->test_input($_POST['detal_text']);
 			$img = $_FILES['img'];
 			$imgName = $img['name'];
-			$pathImg = 'C:/OSPanelLight/domains/studyBit/personal/blogImg/'.$imgName;
+			$pathImg = './../../personal/blogImg/'.$imgName;
 			move_uploaded_file($img['tmp_name'], $pathImg);
 
 			$query = mysqli_query($mysql, "INSERT INTO `posts` (`id_user`, `title`, `prev_text`, `detal_text`, `img`) VALUES 
