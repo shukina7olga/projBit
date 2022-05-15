@@ -4,6 +4,7 @@
     include './../../main/classes/Post.php';
 
     $user = new Post;
+    $delete = $user->deletePost();
     $posts = $user->getPersonalPost(); 
 
 ?>
@@ -26,10 +27,10 @@
                 <div class="col-md-8">
                     <p class="lh-sm text-start post-text"><?=$post['prev_text']?></p>
                     <div class="row" >
-                        <!-- <p class="col text-muted">имя пользователя <?=$post['id_user']?></p> -->
                         <p class="col text-muted">дата создания <?=$post['date_create']?></p>
                     </div>
-                    <a class='btn btn-outline-secondary' href='./edit.php'>Редактировать</a>  
+                    <a class='btn btn-outline-secondary' href='./edit.php'>Редактировать</a>
+                    <a class='btn btn-outline-secondary' href='?del=<?= $post['id']?>'>Удалить</a>  
                 </div>
 
             <?php } else { ?>  
@@ -37,10 +38,10 @@
                 <div class="col-md-12">
                     <p class="lh-sm text-start post-text"><?=$post['prev_text']?></p>
                     <div class="row" >
-                        <!-- <p class="col text-muted">имя пользователя <?=$post['id_user']?></p> -->
                         <p class="col text-muted">дата создания <?=$post['date_create']?></p>
                     </div>
-                    <a class='btn btn-outline-secondary' href='./edit.php'>Редактировать</a>  
+                    <a class='btn btn-outline-secondary' href='./edit.php'>Редактировать</a>
+                    <a class='btn btn-outline-secondary' href='?del=<?= $post['id']?>'>Удалить</a>   
                 </div>
 
             <?php }; ?>

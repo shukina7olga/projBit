@@ -35,10 +35,12 @@
 			$title = $this->test_input($_POST['title']);
 			$prev_text = $this->test_input($_POST['prev_text']);
 			$detal_text = $this->test_input($_POST['detal_text']);
-			$img = $_FILES['img'];
+			$img = $_FILES['img']; // ERROR ПАРАМЕТР ПОГУГЛИТЬ
+		
 			$imgName = $img['name'];
-			$pathImg = './../../personal/blogImg/'.$imgName;
-			move_uploaded_file($img['tmp_name'], $pathImg);
+			$pathImg = '/personal/blogImg/'.$imgName;
+			$fullPathImg = $_SERVER['DOCUMENT_ROOT'].$pathImg;
+			move_uploaded_file($img['tmp_name'], $fullPathImg);
 
 			$query = mysqli_query($mysql, "INSERT INTO `posts` (`id_user`, `title`, `prev_text`, `detal_text`, `img`) VALUES 
 				('{$id_user}', '{$title}', '{$prev_text}', '{$detal_text}', '{$pathImg}')");
@@ -76,7 +78,11 @@
 
 		public function deletePost() 
 		{
-
+			global $mysql;
+			if(isset($_GET['del'])) {
+				$id = $_GET['del'];
+				$queryDel = mysqli_query($mysql, "DELETE FROM `posts` WHERE id = $id");
+			}
 		}
 
 
