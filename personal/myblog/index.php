@@ -29,7 +29,7 @@
                     <div class="row" >
                         <p class="col text-muted">дата создания <?=$post['date_create']?></p>
                     </div>
-                    <a class='btn btn-outline-secondary' href='./edit.php'>Редактировать</a>
+                    <a class='btn btn-outline-secondary' href='./edit.php?edit=<?= $post['id']?>'>Редактировать</a>
                     <a class='btn btn-outline-secondary' href='?del=<?= $post['id']?>'>Удалить</a>  
                 </div>
 
@@ -40,7 +40,7 @@
                     <div class="row" >
                         <p class="col text-muted">дата создания <?=$post['date_create']?></p>
                     </div>
-                    <a class='btn btn-outline-secondary' href='./edit.php'>Редактировать</a>
+                    <a class='btn btn-outline-secondary' href='./edit.php?edit=<?= $post['id']?>'>Редактировать</a>
                     <a class='btn btn-outline-secondary' href='?del=<?= $post['id']?>'>Удалить</a>   
                 </div>
 

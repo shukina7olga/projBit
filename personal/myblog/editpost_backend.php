@@ -2,12 +2,8 @@
     include './../../main/db.php';
     include './../../main/classes/Post.php';
 
-    session_start();
-
-    // $user = new Post;
-    // $user->updatePost();
-
-    var_dump($_GET['id']);
+    $user = new Post;
+    $user->updatePost();
 
     $arr = array(
         'status' => 'error',
