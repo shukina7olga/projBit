@@ -3,6 +3,7 @@
     include './../main/db.php';
     include './../main/classes/Post.php';
 
+    // выводим все все посты
     $user = new Post;
     $posts = $user->getPost();
     

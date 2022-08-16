@@ -28,12 +28,13 @@
             <input class="form-input" type="email" name="reg_mail">
         </label>
         <label class="form-label">Телефон
-            <input class="form-input" type="tel" name="reg_phone">
+            <input class="form-input" type="tel" name="reg_phone" data-phone-pattern = "+7 (___) ___-__-__">
         </label>
         <p><input type="submit" class="btn btn-outline-secondary"/></p>
     </form>
 
     <script src="./../assets/js/ajax_register.js"></script>
+    <script src="./../assets/js/mask.js"></script>
 
     <!-- <script > вспомогашка, чтобы понять что приходит из селекта по полу
         document.getElementById('reg_gend').addEventListener('change', function() {

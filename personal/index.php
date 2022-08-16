@@ -19,5 +19,5 @@
     </div>
     <a class='btn btn-outline-secondary' href='/private.php'>Назад</a>
     <a class='btn btn-outline-secondary' href='/logout.php'>Выйти</a>
-
+    <a class='btn btn-outline-secondary' href='/personal/edit_personal.php?edit=<?= $_SESSION['user']['user_id']?>'>Редактировать</a>
 <?php include "./main/footer.php"?>

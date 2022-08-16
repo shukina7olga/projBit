@@ -2,7 +2,7 @@
     include "./../../main/header.php";
     include './../../main/db.php';
     include './../../main/classes/Post.php';
-
+    // выводим все посты конкретного товарища
     $user = new Post;
     $delete = $user->deletePost();
     $posts = $user->getPersonalPost(); 
@@ -21,7 +21,7 @@
                 if($imgpath['extension'] != NULL) { 
             ?>
 
-                <div class="col-md-4">
+                <div class="col-md-4 p-3">
                     <img class="img-post" src=<?=$post['img']?> alt="">             
                 </div>
                 <div class="col-md-8">
@@ -35,7 +35,7 @@
 
             <?php } else { ?>  
 
-                <div class="col-md-12">
+                <div class="col-md-12 p-3">
                     <p class="lh-sm text-start post-text"><?=$post['prev_text']?></p>
                     <div class="row" >
                         <p class="col text-muted">дата создания <?=$post['date_create']?></p>

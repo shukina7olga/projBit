@@ -56,7 +56,9 @@
 
 
 .post-h {
-    background-color: aliceblue;
+    background-color: #c8e5ff;
+    border-radius: 12px;
+    user-select: none;
 }
 
 .post-h:hover {

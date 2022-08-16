@@ -25,7 +25,7 @@
 			$pass = $this->test_input($_POST['pass']) ;
    			$login = $this->test_input($_POST['login']);
 			$result = $mysql->prepare("SELECT * FROM `users` WHERE `user_login` = ? AND `user_pass` = ?"); // шаблон запроса
-			$result->bind_param('ss', $login, $pass);
+			$result->bind_param('ss', $login, md5($pass));
 			$result->execute();
 			$result = $result->get_result(); 
 			$user = $result->fetch_assoc(); // конвертируем данные в массив
@@ -112,7 +112,7 @@
 		{
 			global $mysql;	
 
-			$reg_name = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_name']));
+			$reg_name = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_name'])); // чистим от пробелов
 			$reg_fullname = $this->test_input($_POST['reg_fullname']); 
 			$reg_login = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_login']));
 			$reg_pass = $this->test_input($_POST['reg_pass']);
@@ -127,7 +127,7 @@
 		
 			if(!preg_match("/^[0-9]+$/", $reg_pass)) {
 				$err[] = "Пароль может состоять только из цифр";
-			}
+			} 
 		
 			if(!preg_match("/^[a-zA-Z]+$/", $reg_login)) {
 				$err[] = "Логин может состоять только из букв английского алфавита";
@@ -161,6 +161,7 @@
 			}   
 			
 			if(empty($err)) {
+				$reg_pass = md5($reg_pass);
 				$query = mysqli_query($mysql, "INSERT INTO `users` (`user_activity`, `user_name`, `user_fullname`, `user_login`, `user_pass`, `user_birth`, `user_gend`, `user_mail`, `user_phone`) VALUES 
 				(1, '{$reg_name}', '{$reg_fullname}', '{$reg_login}', '{$reg_pass}', '{$reg_birth}', {$reg_gend}, '{$reg_mail}', '{$reg_phone}')");
 				if ($query) {
@@ -175,55 +176,106 @@
 
 
 
-		// при условии, что будет сверстана ещё одна форма с уменьшенным числом инпутов (логина не будет)
-		//, где у кнопки отправки будет name="update" 
+		// при условии, что будет сверстана ещё одна форма с уменьшенным числом инпутов (логина не будет) 
 		public function update()
 		{
-			if(isset($_POST["update"])) {
+			session_start();
+			global $mysql;
 
-				function test_input($data) { // для очищения от лишних символов
-					$data = trim($data);
-					$data = stripslashes($data);
-					$data = htmlspecialchars($data);
-					return $data;
-				}
-	
-				$err = array();
-	
-				$up_name = test_input($_POST['up_name']);
-				$up_fullname = htmlspecialchars($_POST['up_fullname']);
-				// $up_login = test_input($_POST['up_login']);  Андрей сказал, что пользователю не дают править логин
-				$up_pass = test_input($_POST['up_pass']);
-				$up_birth = $_POST['up_birth'];
-				$up_gend = test_input($_POST['up_gend']); 
-				$up_mail = test_input($_POST['up_mail']);
-				$up_phone = test_input($_POST['up_phone']);
-	
-	
-	
-				if(!preg_match("/^[0-9]+$/", $up_pass)) {
-					$err[] = "Пароль может состоять только из цифр";
-				}
-	
-				// if(!preg_match("/^[a-zA-Z]+$/", $up_login) {   Андрей сказал, что пользователю не дают править логин
-				// 	$err[] = "Логин может состоять только из букв английского алфавита";
-				// }
-				
-				// //проверяем, не сущестует ли пользователя с таким логином
-				// $query = mysql_query("SELECT COUNT(user_id) FROM users WHERE user_login='".mysql_real_escape_string($reg_login)."'");
-	
+			$user_id = $_SESSION['user']['user_id'];
+
+			$err = array();
+
+			$up_name = $this->test_input(preg_replace("/\s+/", "", $_POST['reg_name']));
+			$up_fullname = $this->test_input($_POST['reg_fullname']); 
+			// $up_login = test_input($_POST['up_login']);  Андрей сказал, что пользователю не дают править логин
+			$up_birth = $_POST['reg_birth'];
+			$up_gend = $_POST['reg_gend'];
+			$up_mail = filter_var($_POST['reg_mail'], FILTER_SANITIZE_EMAIL);  
+			$up_phone = $this->test_input($_POST['reg_phone']);
+
+			// для смены пароля
+			$user_id = $_SESSION['user']['user_id'];
+			$old_pass = $this->test_input($_POST['old_pass']);
+			$old_pass_hesh = md5($old_pass);
+			$new_pass = $this->test_input($_POST['new_pass']);
+			$new_check_pass = $this->test_input($_POST['new_check_pass']);
+
+
+			$user_pass_hesh = $_SESSION['user']['user_pass']; // берем хеш пароля, что лежит в бд. ниже на случай если надо брать из бд
+			// $user_pass = mysqli_query($mysql, "SELECT * FROM `users` WHERE user_id = '{$user_id}'");
+			// $pass_mass = mysqli_fetch_all($user_pass, MYSQLI_ASSOC);
+			// $user_pass_hesh = $pass_mass[0]['user_pass'];
+
+
+			if($old_pass_hesh !== $user_pass_hesh && $old_pass != '') {
+				$err[] = "Текущий пароль ошибочен";
+			}
+
+			if(!preg_match("/^[0-9]+$/", $new_pass) && $new_pass != '') {
+				$err[] = "Новый пароль может состоять только из цифр";
+			}
+
+			if($new_pass !== $new_check_pass) {
+				$err[] = "Пароль подтверждён некорректно";
+			}
+
+			$new_pass_hesh = md5($new_pass);
+
+			if($err === []) {
+				$query = mysqli_query($mysql, "UPDATE `users` SET  `user_name`='$up_name',
+				`user_fullname`='$up_fullname', `user_birth`='$up_birth', `user_gend`='$up_gend',
+				`user_mail`='$up_mail', `user_phone`='$up_phone', `user_pass`='$new_pass_hesh'  WHERE `user_id`=$user_id");
+				if ($query) {
+					// echo '<p>Данные успешно добавлены в таблицу<p>'; С ЭТОЙ СТРОЧКОЙ НЕ ПАРСИТ. ПРИ ПАРСИНГЕ НАЧИНАЕТ ПИХАТЬ ЭТУ СТРОКУ
+				} else {
+					echo '<p>Произошла ошибка: ' . mysqli_error($mysql) . '</p>';
+				} 
+			} else {
+				return $err;
+			}
+			
+
+		}
 		
 
-				mysqli_query("UPDATE users SET 
-					user_name='.$up_name',
-					user_fullname='.$up_fullname',
-					user_pass='.$up_pass',
-					user_birth='.$up_birth',  
-					user_gend='.$up_gend',
-					user_mail='.$up_mail',
-					user_phone='.$up_phone'
-				");
+		// чтобы при редактировании в полях был текст, который будем менять
+		public function  watchEditedUser() 
+		{
+			global $mysql;
+			if(isset($_GET['edit'])) {
+				$id = $_GET['edit'];
+				$user_inf = mysqli_query($mysql, "SELECT * FROM `users` WHERE user_id = '{$id}'");
+				$inform = mysqli_fetch_all($user_inf, MYSQLI_ASSOC);
+				return $inform;
 			}
+		}
+
+
+		public function passEdit()
+		{
+			global $mysql;
+			
+
+			
+
+			
+			
+
+
+			
+
+			if(empty($err)) {
+				$query = mysqli_query($mysql, "UPDATE `users` SET  `user_pass`=''  WHERE `user_id`=md5($user_id)");
+				if ($query) {
+					// echo '<p>Данные успешно добавлены в таблицу<p>'; С ЭТОЙ СТРОЧКОЙ НЕ ПАРСИТ. ПРИ ПАРСИНГЕ НАЧИНАЕТ ПИХАТЬ ЭТУ СТРОКУ
+				} else {
+					echo '<p>Произошла ошибка: ' . mysqli_error($mysql) . '</p>';
+				} 
+			} else {
+				
+			}
+
 		}
 
 	}			

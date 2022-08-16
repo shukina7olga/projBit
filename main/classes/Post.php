@@ -72,9 +72,16 @@
 			$title = $_POST['title'];
 			$prev_text = $_POST['prev_text'];
 			$detal_text = $_POST['detal_text'];
+
+			$img = $_FILES['img']; 
+		
+			$imgName = $img['name'];
+			$pathImg = '/personal/blogImg/'.$imgName; // этот путь храним в бд
+			$fullPathImg = $_SERVER['DOCUMENT_ROOT'].$pathImg; // полный путь, чтобы четко знать куда сохраняем файл
+			move_uploaded_file($img['tmp_name'], $fullPathImg); // сохраняем файл
 		
 			$query = mysqli_query($mysql, "UPDATE `posts` SET  `title`='$title',
-			`prev_text`='$prev_text', `detal_text`='$detal_text' WHERE `id`=$id");
+			`prev_text`='$prev_text', `detal_text`='$detal_text', `img`='$pathImg'  WHERE `id`=$id");
 			if ($query) {
 				// echo '<p>Данные успешно добавлены в таблицу<p>'; С ЭТОЙ СТРОЧКОЙ НЕ ПАРСИТ. ПРИ ПАРСИНГЕ НАЧИНАЕТ ПИХАТЬ ЭТУ СТРОКУ
 			} else {

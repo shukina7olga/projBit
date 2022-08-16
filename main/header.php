@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+    session_start();      
 ?>
 
 <!DOCTYPE html>
@@ -17,12 +17,20 @@
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-            <img src="https://gorodrabot.ru/images/company_photo/2495.png" class="navbar-brand"  loading="lazy" alt="первый бит" width="20%">
-            
+            <a href="/" style="display:contents">
+                <img src="https://gorodrabot.ru/images/company_photo/2495.png" class="navbar-brand"  loading="lazy" alt="первый бит" width="20%">
+            </a>
             <nav class="nav">
                 <a class="nav-link" href="./../../index.php">Домой</a>
-                <a class="nav-link" href="./../../auth.php">Авторизация</a>
-                <a class="nav-link" href="./../../blog/index.php">Блог</a>
+                    <? if (isset($_SESSION['user'])) { ?>
+                        <a href="/private.php" class="nav-link">
+                            <?='Моя страница  '. $_SESSION['user']['user_name'];
+                            ?>
+                        </a>
+                    <?} else { ?>
+                        <a href="/auth.php" class="nav-link">Авторизация</a>
+                    <? }; ?>
+                <!-- <a class="nav-link" href="./../../blog/index.php">Блог</a> -->
             </nav>
         </div>
   
